@@ -1,0 +1,28 @@
+import random
+def h(s):
+  cnt = 0
+  for i in range(8):
+    for j in range(i+1,8):
+      if s[i] == s[j] or abs(i-j) == abs(s[i]-s[j]):
+        cnt+=1
+  return cnt
+def hill():
+  s = [random.randint(0,7) for _ in range(8)]
+  while(h(s) != 0):
+    neighbours=[]
+    for i in range(8):
+      for r in range(8):
+        t = s.copy()
+        t[i] = r
+        neighbours.append(t)
+    best = min(neighbours,key=h)
+    if(h(best) >= h(s)):
+      return None
+    s= best
+  return s
+while(True):
+  v = hill()
+  if v is not None:
+    print(v)
+    break
+    
